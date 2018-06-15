@@ -1,4 +1,4 @@
-package handler
+package app
 
 import (
 	"encoding/json"
@@ -7,13 +7,21 @@ import (
 	"strings"
 )
 
+type handler struct {
+}
+
+// NewHandler is a method
+func NewHandler() *handler {
+	return &handler{}
+}
+
 // Ping get healtch check
 // @Summary get healtch check
 // @Description get health check
 // @Accept
 // @Produce application/json
 // @Router /ping [get]
-func Ping(w http.ResponseWriter, r *http.Request) {
+func (h *handler) Ping(w http.ResponseWriter, r *http.Request) {
 	var m = map[string]bool{"pong": true}
 
 	str, err := json.Marshal(m)
@@ -32,7 +40,7 @@ func Ping(w http.ResponseWriter, r *http.Request) {
 // @Accept
 // @Produce application/json
 // @Router /env [get]
-func Env(w http.ResponseWriter, r *http.Request) {
+func (h *handler) Env(w http.ResponseWriter, r *http.Request) {
 	var env = make(map[string]string)
 	for _, r := range os.Environ() {
 		var a = strings.Split(r, "=")
@@ -55,7 +63,7 @@ func Env(w http.ResponseWriter, r *http.Request) {
 // @Accept
 // @Produce application/json
 // @Router /header [get]
-func Header(w http.ResponseWriter, r *http.Request) {
+func (h *handler) Header(w http.ResponseWriter, r *http.Request) {
 	str, err := json.Marshal(r.Header)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
