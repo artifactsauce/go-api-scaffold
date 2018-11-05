@@ -30,7 +30,6 @@ func (h *handler) Ping(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	w.Write(str)
 }
 
@@ -53,7 +52,6 @@ func (h *handler) Env(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	w.Write(str)
 }
 
@@ -70,6 +68,5 @@ func (h *handler) Header(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	w.Write(str)
 }
